@@ -61,7 +61,7 @@ void cMain::OnButtonClicked(wxCommandEvent& evt)
 	m_Text1->AppendText(this->FindItem(id)->GetLabel());
 	if (id == 17)
 	{
-		m_Text1->Clear();
+		m_Text1->Clear(); 
 	}
 
 
