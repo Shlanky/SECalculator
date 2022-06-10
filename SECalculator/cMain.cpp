@@ -52,7 +52,7 @@ cMain::cMain() : wxFrame(nullptr, 10000, "Calculator Application - Stratos", wxP
 cMain::~cMain()
 {
 
-}
+} 
 
 void cMain::OnButtonClicked(wxCommandEvent& evt)
 {
