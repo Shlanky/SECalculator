@@ -4,6 +4,7 @@ class cMain : public wxFrame
 {
 public:
 	cMain();
+	wxDECLARE_EVENT_TABLE();
 	~cMain();
 	wxButton* Button0 = nullptr;	// Creates a button.
 	wxTextCtrl* m_Text1 = nullptr;	// Creates an empty TextBox
@@ -28,5 +29,9 @@ public:
 	wxButton* ButtonClear = nullptr;
 	wxButton* DivisionOP = nullptr;
 	wxButton* Mod = nullptr;
+
+	//Allows us to create events for buttons
+	void OnButtonClicked(wxCommandEvent& evt);
 };
 
+//AppendText
