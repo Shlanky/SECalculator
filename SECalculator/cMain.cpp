@@ -1,5 +1,11 @@
 #include "cMain.h"
 #include "ButtonFactory.h";
+#include <string>
+#include "Processor.h"
+using namespace std;
+using std::string;
+
+
 wxBEGIN_EVENT_TABLE(cMain, wxFrame)
 EVT_BUTTON(1, cMain::OnButtonClicked)
 EVT_BUTTON(2, cMain::OnButtonClicked)
@@ -22,6 +28,17 @@ EVT_BUTTON(18, cMain::OnButtonClicked)
 EVT_BUTTON(19, cMain::OnButtonClicked)
 EVT_BUTTON(20, cMain::OnButtonClicked)
 wxEND_EVENT_TABLE()
+
+int one = 0;
+int two = 0;
+string _one = "";
+string _two = "";
+string sym = "";
+bool symbol = false;
+
+
+
+
 
 cMain::cMain() : wxFrame(nullptr, 10000, "Calculator Application - Stratos", wxPoint(30,30), wxSize(400,600))
 {
@@ -58,12 +75,94 @@ cMain::~cMain()
 
 void cMain::OnButtonClicked(wxCommandEvent& evt)
 {
+	Processor* process = Processor::GetInstance();
 	int id = evt.GetId();
 	
 	m_Text1->AppendText(this->FindItem(id)->GetLabel());
-	if (id == 17)
+	if (id >= 0 && id < 10)
 	{
-		m_Text1->Clear(); 
+	if (symbol == true)
+	{
+		wxButton* somebutton = dynamic_cast<wxButton*>(evt.GetEventObject());
+		if (two != 0)
+		{
+			_two = std::to_string(two);
+			_two += somebutton->GetLabel();
+		}
+		else
+		{
+			_two += somebutton->GetLabel();
+		}
+	}
+	}
+	if (id == 16)
+	{
+		m_Text1->Clear();
+	}
+	else if (id == 13)
+	{
+		//+
+		_one = m_Text1->GetValue();
+		sym = "+";
+		symbol = true;
+	}
+	else if (id == 14)
+	{
+		//-
+		_one = m_Text1->GetValue();
+		sym = "-";
+		symbol = true;
+	}
+	else if (id == 15)
+	{
+		//*
+		_one = m_Text1->GetValue();
+		sym = "*";
+		symbol = true;
+	}
+	else if (id == 17)
+	{
+		// /
+		_one = m_Text1->GetValue();
+		sym = "/";
+		symbol = true;
+	}
+	else if (id == 12)
+	{
+		symbol = false;
+		if (sym == "+")
+		{
+			one = wxAtoi(_one);
+			two = wxAtoi(_two);
+			m_Text1->Clear();
+			m_Text1->AppendText(process->Addition(one, two));
+		}
+		else if (sym == "-")
+		{
+			one = wxAtoi(_one);
+			two = wxAtoi(_two);
+			m_Text1->Clear();
+			m_Text1->AppendText(process->Subtraction(one, two));
+		}
+		if (sym == "*")
+		{
+			one = wxAtoi(_one);
+			two = wxAtoi(_two);
+			m_Text1->Clear();
+			m_Text1->AppendText(process->Multiply(one, two));
+		}
+		if (sym == "/")
+		{
+			one = wxAtoi(_one);
+			two = wxAtoi(_two);
+			m_Text1->Clear();
+			m_Text1->AppendText(process->Division(one, two));
+		}
+		_one.clear();
+		_two.clear();
+		one = 0;
+		two = 0;
+
 	}
 
 
