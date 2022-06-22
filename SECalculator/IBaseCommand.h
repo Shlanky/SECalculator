@@ -3,8 +3,7 @@
 class IBaseCommand
 {
 public:
-
-	virtual std::string Execute(int one, int two) = 0;
+		virtual std::string Execute() = 0;
 
 };
 

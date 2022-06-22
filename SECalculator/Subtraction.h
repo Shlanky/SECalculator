@@ -1,13 +1,23 @@
 #pragma once
 #include <string>
-class Subtraction
+#include "IBaseCommand.h"
+#include "Processor.h"
+class Subtraction : public IBaseCommand
 {
+private:
+	Processor* process = nullptr;
+	int one = 0;
+	int two = 0;
 public:
-
-	std::string Execute(int one, int two)
+	Subtraction(Processor* _process, int _one, int _two)
 	{
-		std::string sub = std::to_string(one - two);
-		return sub;
+		process = _process;
+		one = _one;
+		two = _two;
+	}
+	std::string Execute()
+	{
+		return process->Subtraction(one, two);
 	}
 };
 

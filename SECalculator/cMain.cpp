@@ -41,7 +41,7 @@ string _two = "";
 string sym = "";
 bool symbol = false;
 
-vector<IBaseCommand*>commands;
+vector<IBaseCommand*> commands;
 
 
 
@@ -141,36 +141,41 @@ void cMain::OnButtonClicked(wxCommandEvent& evt)
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			Addition* pluss = new Addition();
-			
-			m_Text1->AppendText(pluss->Execute(one, two));
+			Addition a(process, one, two);
+			commands.push_back(&a);
+
 		}
 		else if (sym == "-")
 		{
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			Subtraction* subb = new Subtraction();
-
-			m_Text1->AppendText(subb->Execute(one, two));
+			Subtraction s(process, one, two);
+			commands.push_back(&s);
 		}
 		if (sym == "*")
 		{
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			Multiply* multt = new Multiply();
-			m_Text1->AppendText(multt->Execute(one, two));
+			Multiply m(process, one, two);
+			commands.push_back(&m);
 		}
 		if (sym == "/")
 		{
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			Divide* divii = new Divide();
+			Divide d(process, one,two);
+			commands.push_back(&d);
 
-			m_Text1->AppendText(divii->Execute(one, two));
+			//m_Text1->AppendText(divii->Execute(one, two));
 		}
+		for (size_t i = 0; i < commands.size(); i++)
+		{
+			m_Text1->AppendText(commands[i]->Execute());
+		}
+		commands.clear();
 		_one.clear();
 		_two.clear();
 		one = 0;

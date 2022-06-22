@@ -1,13 +1,24 @@
 #pragma once
 #include <string>
-class Addition
+#include "IBaseCommand.h"
+#include "Processor.h"
+class Addition:public IBaseCommand
 {
+private:
+	Processor* process = nullptr;
+	int one = 0;
+	int two = 0;
 public:
-
-	std::string Execute(int one, int two)
+	Addition(Processor* _process, int _one, int _two)
 	{
-		std::string add = std::to_string(one + two);
-		return add;
+		process = _process;
+		one = _one;
+		two = _two;
+	}
+	std::string Execute()
+	{
+		return process->Addition(one, two);
+
 	}
 
 };
