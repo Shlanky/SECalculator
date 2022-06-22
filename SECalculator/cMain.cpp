@@ -2,6 +2,11 @@
 #include "ButtonFactory.h";
 #include <string>
 #include "Processor.h"
+#include "IBaseCommand.h"
+#include "Addition.h"
+#include "Subtraction.h"
+#include "Multiply.h"
+#include "Divide.h"
 using namespace std;
 using std::string;
 
@@ -36,7 +41,7 @@ string _two = "";
 string sym = "";
 bool symbol = false;
 
-
+vector<IBaseCommand*>commands;
 
 
 
@@ -75,6 +80,7 @@ cMain::~cMain()
 
 void cMain::OnButtonClicked(wxCommandEvent& evt)
 {
+	
 	Processor* process = Processor::GetInstance();
 	int id = evt.GetId();
 	
@@ -135,28 +141,35 @@ void cMain::OnButtonClicked(wxCommandEvent& evt)
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			m_Text1->AppendText(process->Addition(one, two));
+			Addition* pluss = new Addition();
+			
+			m_Text1->AppendText(pluss->Execute(one, two));
 		}
 		else if (sym == "-")
 		{
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			m_Text1->AppendText(process->Subtraction(one, two));
+			Subtraction* subb = new Subtraction();
+
+			m_Text1->AppendText(subb->Execute(one, two));
 		}
 		if (sym == "*")
 		{
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			m_Text1->AppendText(process->Multiply(one, two));
+			Multiply* multt = new Multiply();
+			m_Text1->AppendText(multt->Execute(one, two));
 		}
 		if (sym == "/")
 		{
 			one = wxAtoi(_one);
 			two = wxAtoi(_two);
 			m_Text1->Clear();
-			m_Text1->AppendText(process->Division(one, two));
+			Divide* divii = new Divide();
+
+			m_Text1->AppendText(divii->Execute(one, two));
 		}
 		_one.clear();
 		_two.clear();

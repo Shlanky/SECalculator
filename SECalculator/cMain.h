@@ -29,6 +29,7 @@ public:
 	wxButton* ButtonClear = nullptr;
 	wxButton* DivisionOP = nullptr;
 	wxButton* Mod = nullptr;
+	
 
 	//Allows us to create events for buttons
 	void OnButtonClicked(wxCommandEvent& evt);
