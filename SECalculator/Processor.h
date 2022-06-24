@@ -56,6 +56,7 @@ public:
 			if (mod < 10)
 			{
 				results = std::to_string(mod) + results;
+				break;
 			}
 			else if (mod == 10) {
 				results = "A" + results;

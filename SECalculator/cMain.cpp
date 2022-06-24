@@ -104,6 +104,12 @@ void cMain::OnButtonClicked(wxCommandEvent& evt)
 	if (id == 16)
 	{
 		m_Text1->Clear();
+		symbol = false;
+		sym = "";
+		_one.clear();
+		_two.clear();
+		one = 0;
+		two = 0;
 	}
 	else if (id == 13)
 	{
