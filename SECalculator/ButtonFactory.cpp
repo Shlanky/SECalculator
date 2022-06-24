@@ -1,5 +1,6 @@
 #include "ButtonFactory.h"
 
+
 /*wxButton* ButtonFactory::Createbutton(wxWindow window, int ID, wxString string, wxPoint pointer, wxSize size)
 {
 	return new wxButton(window, ID, string, pointer, size);
